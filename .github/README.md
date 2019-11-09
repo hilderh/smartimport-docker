@@ -1,10 +1,8 @@
-# Using Wordpress with SSL enabled integrated with NGINX proxy and autorenew LetsEncrypt certificates
+# Smartimport Technical Environment
 
-![wordpress-docker-letsencrypt](https://github.com/evertramos/images/raw/master/wordpress.jpg)
+This docker-compose base is a forked project from:
 
-This docker-compose should be used with WebProxy (the NGINX Proxy):
-
-[https://github.com/evertramos/docker-compose-letsencrypt-nginx-proxy-companion](https://github.com/evertramos/docker-compose-letsencrypt-nginx-proxy-companion)
+[https://github.com/evertramos/docker-wordpress-letsencrypt](https://github.com/evertramos/docker-wordpress-letsencryptn)
 
 
 ## Usage
