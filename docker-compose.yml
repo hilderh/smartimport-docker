@@ -2,21 +2,21 @@ version: '3'
 
 services:
    db:
-     container_name: ${CONTAINER_DB_NAME}
+     container_name: smartimport-db-container
      image: mariadb:latest
      restart: unless-stopped
      volumes:
         - ${DB_PATH}:/var/lib/mysql
      environment:
-       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-       MYSQL_DATABASE: ${MYSQL_DATABASE}
-       MYSQL_USER: ${MYSQL_USER}
-       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+       MYSQL_ROOT_PASSWORD: J#k$4yFne83Yx594
+       MYSQL_DATABASE: smartimport-db
+       MYSQL_USER: smartsite
+       MYSQL_PASSWORD: J#k$4yFne83Yx594
 
    wordpress:
      depends_on:
        - db
-     container_name: ${CONTAINER_WP_NAME}
+     container_name: smartimport-wp-container
      image: wordpress:latest
      restart: unless-stopped
      volumes:
@@ -24,17 +24,24 @@ services:
        - ${WP_CONTENT}:/var/www/html/wp-content
        - ./conf.d/php.ini:/usr/local/etc/php/conf.d/php.ini
      environment:
-       WORDPRESS_DB_HOST: ${CONTAINER_DB_NAME}:3306
-       WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
-       WORDPRESS_DB_USER: ${MYSQL_USER}
-       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
-       WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
-       VIRTUAL_HOST: ${DOMAINS}
-       LETSENCRYPT_HOST: ${DOMAINS}
-       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
-     logging:
-       options:
-         max-size: ${LOGGING_OPTIONS_MAX_SIZE:-200k}
+       WORDPRESS_DB_HOST: smartimport-db-container:3306
+       WORDPRESS_DB_NAME: smartimport-db
+       WORDPRESS_DB_USER: smartsite
+       WORDPRESS_DB_PASSWORD: J#k$4yFne83Yx594
+       WORDPRESS_TABLE_PREFIX: wp_
+       VIRTUAL_HOST: thesmartimport.com,www.thesmartimport.com
+       LETSENCRYPT_HOST: thesmartimport.com,www.thesmartimport.com
+       LETSENCRYPT_EMAIL: hilderalbertohm@gmail.com
+   phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    external_links:
+      - db
+    ports:
+      - 8181:80
+    environment:
+      MYSQL_USERNAME: root
+      MYSQL_ROOT_PASSWORD: J#k$4yFne83Yx594
 
 #   wpcli:
 #     image: tatemz/wp-cli
@@ -48,4 +55,4 @@ services:
 networks:
     default:
        external:
-         name: ${NETWORK}
+         name: webproxy
