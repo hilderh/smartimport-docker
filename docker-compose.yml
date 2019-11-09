@@ -8,10 +8,10 @@ services:
      volumes:
         - ${DB_PATH}:/var/lib/mysql
      environment:
-       MYSQL_ROOT_PASSWORD: J#k$4yFne83Yx594
+       MYSQL_ROOT_PASSWORD: cve4Zwdh5AaxNxUk
        MYSQL_DATABASE: smartimport-db
        MYSQL_USER: smartsite
-       MYSQL_PASSWORD: J#k$4yFne83Yx594
+       MYSQL_PASSWORD: cve4Zwdh5AaxNxUk
 
    wordpress:
      depends_on:
@@ -27,7 +27,7 @@ services:
        WORDPRESS_DB_HOST: smartimport-db-container:3306
        WORDPRESS_DB_NAME: smartimport-db
        WORDPRESS_DB_USER: smartsite
-       WORDPRESS_DB_PASSWORD: J#k$4yFne83Yx594
+       WORDPRESS_DB_PASSWORD: cve4Zwdh5AaxNxUk
        WORDPRESS_TABLE_PREFIX: wp_
        VIRTUAL_HOST: thesmartimport.com,www.thesmartimport.com
        LETSENCRYPT_HOST: thesmartimport.com,www.thesmartimport.com
@@ -41,7 +41,7 @@ services:
       - 8181:80
     environment:
       MYSQL_USERNAME: root
-      MYSQL_ROOT_PASSWORD: J#k$4yFne83Yx594
+      MYSQL_ROOT_PASSWORD: cve4Zwdh5AaxNxUk
 
 #   wpcli:
 #     image: tatemz/wp-cli
