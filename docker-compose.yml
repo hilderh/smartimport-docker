@@ -22,14 +22,16 @@ services:
      volumes:
        - ${WP_CORE}:/var/www/html
        - ${WP_CONTENT}:/var/www/html/wp-content
+       - ./conf.d/php.ini:/usr/local/etc/php/conf.d/php.ini
+       - ./conf.d/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
      environment:
        WORDPRESS_DB_HOST: smartimport-db-container:3306
        WORDPRESS_DB_NAME: smartimport-db
        WORDPRESS_DB_USER: smartsite
        WORDPRESS_DB_PASSWORD: cve4Zwdh5AaxNxUk
        WORDPRESS_TABLE_PREFIX: wp_
-       VIRTUAL_HOST: thesmartimport.com,www.thesmartimport.com
-       LETSENCRYPT_HOST: thesmartimport.com,www.thesmartimport.com
+       VIRTUAL_HOST: smart-import.com,www.smart-import.com
+       LETSENCRYPT_HOST: smart-import.com,www.smart-import.com
        LETSENCRYPT_EMAIL: hilderalbertohm@gmail.com
    phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -41,16 +43,6 @@ services:
     environment:
       MYSQL_USERNAME: root
       MYSQL_ROOT_PASSWORD: cve4Zwdh5AaxNxUk
-
-#   wpcli:
-#     image: tatemz/wp-cli
-#     volumes:
-#       - ${WP_CORE}:/var/www/html
-#       - ${WP_CONTENT}:/var/www/html/wp-content
-#     depends_on:
-#       - db
-#     entrypoint: wp
-
 networks:
     default:
        external:
