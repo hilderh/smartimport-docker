@@ -4,7 +4,7 @@ services:
    db:
      container_name: smartimport-db-container
      image: mariadb:latest
-     restart: unless-stopped
+     restart: always
      volumes:
         - ${DB_PATH}:/var/lib/mysql
      environment:
@@ -18,7 +18,9 @@ services:
        - db
      container_name: smartimport-wp-container
      image: wordpress:latest
-     restart: unless-stopped
+     restart: always
+     ports:
+       - "80:80"
      volumes:
        - ${WP_CORE}:/var/www/html
        - ${WP_CONTENT}:/var/www/html/wp-content
@@ -30,9 +32,9 @@ services:
        WORDPRESS_DB_USER: smartsite
        WORDPRESS_DB_PASSWORD: cve4Zwdh5AaxNxUk
        WORDPRESS_TABLE_PREFIX: wp_
-       VIRTUAL_HOST: smart-import.com,www.smart-import.com
-       LETSENCRYPT_HOST: smart-import.com,www.smart-import.com
-       LETSENCRYPT_EMAIL: hilderalbertohm@gmail.com
+#       VIRTUAL_HOST: smart-import.com,www.smart-import.com
+#       LETSENCRYPT_HOST: smart-import.com,www.smart-import.com
+#       LETSENCRYPT_EMAIL: hilderalbertohm@gmail.com
    phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
@@ -43,7 +45,7 @@ services:
     environment:
       MYSQL_USERNAME: root
       MYSQL_ROOT_PASSWORD: cve4Zwdh5AaxNxUk
-networks:
-    default:
-       external:
-         name: webproxy
+#networks:
+#    default:
+#       external:
+#         name: ${NETWORK}
